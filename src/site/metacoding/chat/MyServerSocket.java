@@ -51,10 +51,6 @@ public class MyServerSocket {
                         String inputData = scan.nextLine();
                         writer.write(inputData + "\n");
                         writer.flush();
-
-                        if (inputData.equals("aaa")) {
-                            break;
-                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -66,10 +62,6 @@ public class MyServerSocket {
                 // System.out.println("클라이언트 연결됨");
                 String inputData = reader.readLine();
                 System.out.println("클라이언트 -> 서버 : " + inputData);
-
-                if (inputData.equals("aaa")) {
-                    break;
-                }
             }
 
         } catch (Exception e) {
