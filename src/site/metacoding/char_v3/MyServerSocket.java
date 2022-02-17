@@ -29,14 +29,14 @@ public class MyServerSocket {
     // 채팅서버는 메시지(요청)를 받을 때만 동작! -> pull 서버
 
     public MyServerSocket() {
-        while (true) {
-            try {
-                serverSocket = new ServerSocket(2000);
-                고객리스트 = new Vector<>(); // 동기화가 처리된 ArrayList
 
-                // while 돌리기
-                // 여러사람이 요청할 때마다 소켓이 새로 생성되어야하기 때문에 전역변수로 생성 X
+        try {
+            serverSocket = new ServerSocket(2000);
+            고객리스트 = new Vector<>(); // 동기화가 처리된 ArrayList
 
+            // while 돌리기
+            // 여러사람이 요청할 때마다 소켓이 새로 생성되어야하기 때문에 전역변수로 생성 X
+            while (true) {
                 Socket socket = serverSocket.accept(); // 대기 -> main 스레드가 하는 일
                 System.out.println("클라이언트 연결됨");
 
@@ -47,10 +47,11 @@ public class MyServerSocket {
                 System.out.println("고객리스트 크기 : " + 고객리스트.size());
 
                 new Thread(t).start();
-            } catch (Exception e) {
-                System.out.println("오류내용 : " + e.getMessage());
             }
+        } catch (Exception e) {
+            System.out.println("오류내용 : " + e.getMessage());
         }
+
     }
 
     // 내부 클래스
@@ -65,6 +66,7 @@ public class MyServerSocket {
 
         public 고객전담스레드(Socket socket) {
             this.socket = socket;
+
             // new될 때 양끝단에 버퍼달림
             try {
                 reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));

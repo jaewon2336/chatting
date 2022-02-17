@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class MyClientSocket {
 
     String username;
-
     Socket socket;
 
     // write 스레드
